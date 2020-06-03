@@ -1,7 +1,6 @@
 package com.example.parent;
 
 import com.example.definition.ITaskService;
-import com.example.definition.TaskType;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
@@ -14,7 +13,6 @@ public class TaskServiceLocator {
     public void registerTask(TaskType taskType, ITaskService taskService){
         taskServiceMap.put(taskType, taskService);
     }
-
 
     public ITaskService lookupTaskService(TaskType taskType){
         if(!taskServiceMap.containsKey(taskType))
