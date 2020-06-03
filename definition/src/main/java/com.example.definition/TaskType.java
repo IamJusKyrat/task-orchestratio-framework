@@ -16,7 +16,7 @@ import java.util.stream.Stream;
 @Getter
 @AllArgsConstructor
 public enum TaskType {
-    IMPORTED("Consent", 1);
+    IMPORTED("Imported", 1);
 
     private static final Map<String, TaskType> VALUE_MAP = Stream.of(values()).collect(Collectors.toMap(k -> k.getValue().toUpperCase(), v -> v));
 

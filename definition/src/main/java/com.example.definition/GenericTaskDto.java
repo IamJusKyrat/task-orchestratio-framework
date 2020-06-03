@@ -4,5 +4,5 @@ public abstract class GenericTaskDto {
     String id;
     String version;
     String otherCommonDetail;
-
+    TaskType taskType;
 }

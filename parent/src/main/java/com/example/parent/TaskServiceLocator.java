@@ -1,22 +1,24 @@
 package com.example.parent;
 
 import com.example.definition.ITaskService;
+import com.example.definition.TaskType;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Component
 public class TaskServiceLocator {
-    private Map<TaskType, ITaskService> taskServiceMap = new HashMap<>();
 
-    public void registerTask(TaskType taskType, ITaskService taskService){
-        taskServiceMap.put(taskType, taskService);
-    }
+    @Autowired
+    List<ITaskService> registeredTaskServices;
 
-    public ITaskService lookupTaskService(TaskType taskType){
-        if(!taskServiceMap.containsKey(taskType))
-            throw new RuntimeException("Task Type "+ taskType.getValue() +" is not registered in the system");
-        return taskServiceMap.get(taskType);
+    ITaskService lookupTaskService(TaskType taskType){
+        return registeredTaskServices.stream()
+                .filter(taskService -> taskService.getTaskType().equals(taskType))
+                .findFirst()
+                .orElseThrow();
     }
 }
